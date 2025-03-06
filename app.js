@@ -5,7 +5,13 @@ const pendingBtn = document.getElementById('pendding-task');
 const allBtn = document.getElementById('all-task');
 const completeBtn = document.getElementById('complete-task');
 
-let tasks = [];
+
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+function saveToLocalStorage() {
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
 
 function renderTasks(filter = 'all') {
   taskList.innerHTML = '';
@@ -38,7 +44,6 @@ function renderTasks(filter = 'all') {
     taskList.appendChild(li);
   });
   
-  taskList.style.display = tasks.length > 0 ? 'block' : 'none';
 }
 addBtn.addEventListener('click', () => {
   const taskText = input.value.trim();
